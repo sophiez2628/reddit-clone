@@ -1,0 +1,18 @@
+<h1>Edit Sub</h1>
+
+<%= render 'layouts/errors' %>
+<form action="<%= sub_url %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <%= auth_token %>
+
+  <label>Title</label>
+    <input type="text" name="sub[title]" value="<%= @sub.title %>">
+
+  <label>Description</label>
+    <textarea name="sub[description]" value="<%= @sub.description %>">
+      <%= @sub.description %>
+    </textarea>
+
+    <input type="submit" value="Edit Sub">
+
+</form>
