@@ -1,0 +1,28 @@
+<h1>Create Post</h1>
+
+<%= render 'layouts/errors' %>
+
+<form action="<%= posts_url %>" method="POST">
+
+  <%= auth_token %>
+
+  <label>Title</label>
+    <input type="text" name="post[title]" value="<%= @post.title %>">
+
+  <label>Url</label>
+    <input type="text" name="post[url]" value="<%= @post.url %>">
+
+  <label>Content</label>
+    <textarea name="post[content]" value="<%= @post.content %>">
+      Input description here
+    </textarea>
+
+  <label>Sub Forums</label>
+    <% @subs.each do |subreddit| %>
+      <input type="checkbox" name="post[sub_ids][]" value="<%= subreddit.id %>">
+      <%= subreddit.title %>
+    <% end %>
+
+    <input type="submit" value="Create Post">
+
+</form>

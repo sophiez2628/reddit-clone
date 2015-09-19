@@ -1,0 +1,29 @@
+<h1>Edit Post</h1>
+
+<%= render 'layouts/errors' %>
+
+<form action="<%= post_url(@post) %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <%= auth_token %>
+
+  <label>Title</label>
+    <input type="text" name="post[title]" value="<%= @post.title %>">
+
+  <label>Url</label>
+    <input type="text" name="post[url]" value="<%= @post.url %>">
+
+  <label>Content</label>
+    <textarea name="post[content]" value="<%= @post.content %>">
+      Input description here
+    </textarea>
+
+  <label>Sub Forums</label>
+    <% @subs.each do |subreddit| %>
+        <input type="checkbox" name="post[sub_ids][]" value="<%= subreddit.id %>"
+         <%= "checked" if @post_subs.any? { |post_sub| post_sub.sub_id == subreddit.id} %> >
+        <%= subreddit.title %>
+    <% end %>
+
+    <input type="submit" value="Edit Post">
+
+</form>
